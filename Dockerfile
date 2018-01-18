@@ -24,7 +24,7 @@ RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-li
   rm -rf linux-amd64
 
 # jx-release-version
-ENV JX_RELEASE_VERSION 1.0.4
+ENV JX_RELEASE_VERSION 1.0.5
 RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v$JX_RELEASE_VERSION/jx-release-version-linux && \
   mv jx-release-version /usr/bin/ && \
   chmod +x /usr/bin/jx-release-version
