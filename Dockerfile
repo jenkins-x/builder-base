@@ -24,10 +24,23 @@ RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-li
   rm -rf linux-amd64
 
 # jx-release-version
-ENV JX_RELEASE_VERSION 1.0.25
+ENV JX_RELEASE_VERSION 1.0.7
 RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v$JX_RELEASE_VERSION/jx-release-version-linux && \
   mv jx-release-version /usr/bin/ && \
   chmod +x /usr/bin/jx-release-version
+
+# jx
+ENV JX_VERSION 1.0.25
+RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${JX_VERSION}-linux-amd64.tar.gz  | tar xzv && \
+  mv linux-amd64/jx /usr/bin/ && \
+  rm -rf linux-amd64
+
+# updatebot
+ENV UPATEBOT_VERSION 1.1.0
+RUN curl -o updatebot https://oss.sonatype.org/content/groups/public/io/jenkins/updatebot/updatebot/${UPATEBOT_VERSION}/updatebot-${UPATEBOT_VERSION}.jar && \
+mv chmod +x updatebot && \
+cp updatebot /usr/bin/ && \
+rm -rf updatebot
 
 # exposecontroller
 ENV EXPOSECONTROLLER_VERSION 2.3.34
