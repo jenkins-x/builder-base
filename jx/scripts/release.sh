@@ -13,7 +13,7 @@ docker build -t docker.io/$ORG/$APP_NAME:${VERSION} .
 docker push docker.io/$ORG/$APP_NAME:${VERSION}
 
 #jx step tag --version ${VERSION}
-git tag -fa v${VERSION} -m \"Release version ${VERSION}\"
+git tag -fa v${VERSION} -m "Release version ${VERSION}"
 git push origin v${VERSION}
 
 
