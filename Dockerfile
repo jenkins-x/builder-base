@@ -24,10 +24,15 @@ RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-li
   rm -rf linux-amd64
 
 # jx-release-version
-ENV JX_RELEASE_VERSION 1.0.25
-RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v$JX_RELEASE_VERSION/jx-release-version-linux && \
+ENV JX_RELEASE_VERSION 1.0.7
+RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v${JX_RELEASE_VERSION}/jx-release-version-linux && \
   mv jx-release-version /usr/bin/ && \
   chmod +x /usr/bin/jx-release-version
+
+# jx
+ENV JX_VERSION 1.0.26
+RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
+  mv jx /usr/bin/
 
 # exposecontroller
 ENV EXPOSECONTROLLER_VERSION 2.3.34
@@ -35,6 +40,17 @@ RUN curl -L https://github.com/fabric8io/exposecontroller/releases/download/v$EX
   chmod +x exposecontroller && \
   mv exposecontroller /usr/bin/
 
+# updatebot
+ENV UPDATEBOT_VERSION 1.1.0
+RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jenkins/updatebot/updatebot/${UPDATEBOT_VERSION}/updatebot-${UPDATEBOT_VERSION}.jar && \
+  chmod +x updatebot && \
+  cp updatebot /usr/bin/ && \
+  rm -rf updatebot
+
+# java required for updatebot
+RUN yum install -y java-1.8.0-openjdk-devel \
+    java-1.8.0-openjdk-devel.i686
+    
 # USER jenkins
 WORKDIR /home/jenkins
 
