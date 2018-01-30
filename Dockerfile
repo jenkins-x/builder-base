@@ -34,19 +34,23 @@ ENV JX_VERSION 1.0.26
 RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
   mv jx /usr/bin/
 
-# updatebot
-ENV UPDATEBOT_VERSION 1.1.0
-RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jenkins/updatebot/updatebot/${UPDATEBOT_VERSION}/updatebot-${UPDATEBOT_VERSION}.jar && \
-chmod +x updatebot && \
-cp updatebot /usr/bin/ && \
-rm -rf updatebot
-
 # exposecontroller
 ENV EXPOSECONTROLLER_VERSION 2.3.34
 RUN curl -L https://github.com/fabric8io/exposecontroller/releases/download/v$EXPOSECONTROLLER_VERSION/exposecontroller-linux-amd64 > exposecontroller && \
   chmod +x exposecontroller && \
   mv exposecontroller /usr/bin/
 
+# updatebot
+ENV UPDATEBOT_VERSION 1.1.0
+RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jenkins/updatebot/updatebot/${UPDATEBOT_VERSION}/updatebot-${UPDATEBOT_VERSION}.jar && \
+  chmod +x updatebot && \
+  cp updatebot /usr/bin/ && \
+  rm -rf updatebot
+
+# java required for updatebot
+RUN yum install -y java-1.8.0-openjdk-devel \
+    java-1.8.0-openjdk-devel.i686
+    
 # USER jenkins
 WORKDIR /home/jenkins
 
