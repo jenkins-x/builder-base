@@ -25,6 +25,9 @@ pipeline {
             }
             steps {
                 container('jx-base') {
+                    sh "./jx/scripts/release.sh"
+
+/*
                     // until kubernetes plugin supports init containers https://github.com/jenkinsci/kubernetes-plugin/pull/229/
                     sh 'cp /root/netrc/.netrc ~/.netrc'
 
@@ -37,6 +40,7 @@ pipeline {
 
                     sh "docker build -t docker.io/$ORG/$APP_NAME:\$(cat VERSION) ."
                     sh "docker push docker.io/$ORG/$APP_NAME:\$(cat VERSION)"
+*/
                 }
             }
         }
