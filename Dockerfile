@@ -25,20 +25,19 @@ RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-li
 
 # jx-release-version
 ENV JX_RELEASE_VERSION 1.0.7
-RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v$JX_RELEASE_VERSION/jx-release-version-linux && \
+RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v${JX_RELEASE_VERSION}/jx-release-version-linux && \
   mv jx-release-version /usr/bin/ && \
   chmod +x /usr/bin/jx-release-version
 
 # jx
-ENV JX_VERSION 1.0.25
-RUN curl https://github.com/jenkins-x/jx/releases/download/v{JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
-  mv linux-amd64/jx /usr/bin/ && \
-  rm -rf linux-amd64
+ENV JX_VERSION 1.0.26
+RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
+  mv jx /usr/bin/
 
 # updatebot
-ENV UPATEBOT_VERSION 1.1.0
-RUN curl -o updatebot https://oss.sonatype.org/content/groups/public/io/jenkins/updatebot/updatebot/${UPATEBOT_VERSION}/updatebot-${UPATEBOT_VERSION}.jar && \
-mv chmod +x updatebot && \
+ENV UPDATEBOT_VERSION 1.1.0
+RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jenkins/updatebot/updatebot/${UPDATEBOT_VERSION}/updatebot-${UPDATEBOT_VERSION}.jar && \
+chmod +x updatebot && \
 cp updatebot /usr/bin/ && \
 rm -rf updatebot
 
