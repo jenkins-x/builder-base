@@ -31,7 +31,7 @@ RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-vers
 
 # jx
 ENV JX_VERSION 1.0.25
-RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${JX_VERSION}-linux-amd64.tar.gz  | tar xzv && \
+RUN curl https://github.com/jenkins-x/jx/releases/download/v{JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
   mv linux-amd64/jx /usr/bin/ && \
   rm -rf linux-amd64
 

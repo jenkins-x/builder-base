@@ -3,7 +3,7 @@ pipeline {
         label "jenkins-jx-base"
     }
     environment {
-        ORG         = 'rawlingsj'
+        ORG         = 'jenkinsxio'
         APP_NAME    = 'builder-base'
     }
     stages {
