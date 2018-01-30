@@ -16,4 +16,4 @@ docker push docker.io/$ORG/$APP_NAME:${VERSION}
 git tag -fa v${VERSION} -m "Release version ${VERSION}"
 git push origin v${VERSION}
 
-
+updatebot push-version --kind docker jenkinsxio/builder-base ${VERSION}
