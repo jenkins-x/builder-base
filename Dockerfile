@@ -6,6 +6,9 @@ RUN yum install -y unzip \
   wget \
   zip
 
+# USER jenkins
+WORKDIR /home/jenkins
+
 # Git
 RUN curl -o ./endpoint-repo-1.7-1.x86_64.rpm https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm && \
   rpm -Uvh endpoint-repo*rpm && \
@@ -22,6 +25,11 @@ ENV HELM_VERSION 2.7.2
 RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz  | tar xzv && \
   mv linux-amd64/helm /usr/bin/ && \
   rm -rf linux-amd64
+
+# gcloud
+ENV GCLOUD_VERSION 187.0.0
+RUN curl -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar xzv
+ENV PATH=$PATH:/home/jenkins/google-cloud-sdk/bin
 
 # jx-release-version
 ENV JX_RELEASE_VERSION 1.0.7
@@ -50,8 +58,5 @@ RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jen
 # java required for updatebot
 RUN yum install -y java-1.8.0-openjdk-devel \
     java-1.8.0-openjdk-devel.i686
-    
-# USER jenkins
-WORKDIR /home/jenkins
 
 CMD ["helm","version"]
