@@ -30,7 +30,7 @@ RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-vers
   chmod +x /usr/bin/jx-release-version
 
 # jx
-ENV JX_VERSION 1.0.32
+ENV JX_VERSION 1.0.40
 RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
   mv jx /usr/bin/
 
