@@ -49,7 +49,7 @@ RUN curl -L https://github.com/fabric8io/exposecontroller/releases/download/v$EX
   mv exposecontroller /usr/bin/
 
 # updatebot
-ENV UPDATEBOT_VERSION 1.1.4
+ENV UPDATEBOT_VERSION 1.1.5
 RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jenkins/updatebot/updatebot/${UPDATEBOT_VERSION}/updatebot-${UPDATEBOT_VERSION}.jar && \
   chmod +x updatebot && \
   cp updatebot /usr/bin/ && \
