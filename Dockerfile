@@ -28,19 +28,15 @@ RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-li
 
 # gcloud
 ENV GCLOUD_VERSION 187.0.0
-RUN curl -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar xzv
-ENV PATH=$PATH:/home/jenkins/google-cloud-sdk/bin
+RUN curl -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar xzv && \
+  mv google-cloud-sdk /usr/bin/
+ENV PATH=$PATH:/usr/bin/google-cloud-sdk/bin
 
 # jx-release-version
 ENV JX_RELEASE_VERSION 1.0.7
 RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v${JX_RELEASE_VERSION}/jx-release-version-linux && \
   mv jx-release-version /usr/bin/ && \
   chmod +x /usr/bin/jx-release-version
-
-# jx
-ENV JX_VERSION 1.0.40
-RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
-  mv jx /usr/bin/
 
 # exposecontroller
 ENV EXPOSECONTROLLER_VERSION 2.3.34
@@ -68,5 +64,10 @@ RUN curl https://azuredraft.blob.core.windows.net/draft/draft-canary-linux-amd64
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
   chmod +x kubectl && \
   mv kubectl /usr/bin/
+
+# jx
+ENV JX_VERSION 1.0.40
+RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
+  mv jx /usr/bin/
 
 CMD ["helm","version"]

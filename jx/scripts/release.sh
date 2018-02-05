@@ -10,7 +10,10 @@ export VERSION="$(jx-release-version)"
 echo "Releasing version to ${VERSION}"
 
 docker build -t docker.io/$ORG/$APP_NAME:${VERSION} .
+docker tag docker.io/$ORG/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER docker.io/$ORG/$APP_NAME:latest
+
 docker push docker.io/$ORG/$APP_NAME:${VERSION}
+docker push docker.io/$ORG/$APP_NAME:latest
 
 #jx step tag --version ${VERSION}
 git tag -fa v${VERSION} -m "Release version ${VERSION}"

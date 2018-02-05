@@ -14,7 +14,9 @@ pipeline {
             steps {
                 container('jx-base') {
                     sh "docker build -t docker.io/$ORG/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER ."
+
                     sh "docker push docker.io/$ORG/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
+
                 }
             }
         }
