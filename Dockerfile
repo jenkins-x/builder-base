@@ -33,7 +33,7 @@ RUN curl -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
 ENV PATH=$PATH:/usr/bin/google-cloud-sdk/bin
 
 # jx-release-version
-ENV JX_RELEASE_VERSION 1.0.7
+ENV JX_RELEASE_VERSION 1.0.9
 RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v${JX_RELEASE_VERSION}/jx-release-version-linux && \
   mv jx-release-version /usr/bin/ && \
   chmod +x /usr/bin/jx-release-version
