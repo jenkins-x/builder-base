@@ -59,4 +59,14 @@ RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jen
 RUN yum install -y java-1.8.0-openjdk-devel \
     java-1.8.0-openjdk-devel.i686
 
+# draft
+RUN curl https://azuredraft.blob.core.windows.net/draft/draft-canary-linux-amd64.tar.gz  | tar xzv && \
+  mv linux-amd64/draft /usr/bin/ && \
+  rm -rf linux-amd64
+
+# kubectl
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
+  chmod +x kubectl && \
+  mv kubectl /usr/bin/
+
 CMD ["helm","version"]
