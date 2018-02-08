@@ -13,9 +13,7 @@ WORKDIR /home/jenkins
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
   yum install -y google-chrome-stable_current_x86_64.rpm && \
   yum install -y Xvfb
-  
-ENV PATH="${PATH}:/opt/google/chrome/chrome"  
-
+ 
 # Git
 RUN curl -o ./endpoint-repo-1.7-1.x86_64.rpm https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm && \
   rpm -Uvh endpoint-repo*rpm && \
@@ -77,4 +75,6 @@ ENV JX_VERSION 1.0.57
 RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
   mv jx /usr/bin/
 
+ENV PATH ${PATH}:/opt/google/chrome 
+ 
 CMD ["helm","version"]
