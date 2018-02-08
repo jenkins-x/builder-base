@@ -20,5 +20,5 @@ git tag -fa v${VERSION} -m "Release version ${VERSION}"
 git push origin v${VERSION}
 
 updatebot push-version --kind docker jenkinsxio/builder-base ${VERSION}
-updatebot push-version --kind helm jenkinsxio/builder-base ${VERSION}
 updatebot update-loop
+updatebot push-version --kind helm jenkinsxio/builder-base ${VERSION}
