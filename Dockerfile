@@ -51,7 +51,7 @@ RUN curl -L https://github.com/fabric8io/exposecontroller/releases/download/v$EX
 
 # skaffold
 ENV SKAFFOLD_VERSION 0.2.0
-RUN curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v${SKAFFOLD_VERSION}/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/bin
+RUN curl -Lo skaffold https://github.com/GoogleCloudPlatform/skaffold/releases/download/v${SKAFFOLD_VERSION}/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/bin
 
 # updatebot
 ENV UPDATEBOT_VERSION 1.1.7
