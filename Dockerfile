@@ -49,6 +49,10 @@ RUN curl -L https://github.com/fabric8io/exposecontroller/releases/download/v$EX
   chmod +x exposecontroller && \
   mv exposecontroller /usr/bin/
 
+# skaffold
+ENV SKAFFOLD_VERSION 2.3.34
+RUN curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v${SKAFFOLD_VERSION}/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/bin
+
 # updatebot
 ENV UPDATEBOT_VERSION 1.1.7
 RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jenkins/updatebot/updatebot/${UPDATEBOT_VERSION}/updatebot-${UPDATEBOT_VERSION}.jar && \
