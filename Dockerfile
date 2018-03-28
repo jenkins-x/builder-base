@@ -1,10 +1,14 @@
 FROM centos:7
 
-RUN yum install -y unzip \
+RUN yum install -y epel-release && \
+  yum install -y unzip \
   which \
   make \
   wget \
-  zip
+  zip \
+  python-pip
+
+RUN pip install anchorecli 
 
 # USER jenkins
 WORKDIR /home/jenkins
