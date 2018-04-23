@@ -60,7 +60,7 @@ RUN curl -Lo skaffold https://github.com/GoogleCloudPlatform/skaffold/releases/d
   mv skaffold /usr/bin
 
 # updatebot
-ENV UPDATEBOT_VERSION 1.1.9
+ENV UPDATEBOT_VERSION 1.1.10
 RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jenkins/updatebot/updatebot/${UPDATEBOT_VERSION}/updatebot-${UPDATEBOT_VERSION}.jar && \
   chmod +x updatebot && \
   cp updatebot /usr/bin/ && \
