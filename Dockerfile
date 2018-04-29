@@ -58,7 +58,7 @@ ENV SKAFFOLD_VERSION 0.4.0
 # RUN curl -Lo skaffold https://github.com/GoogleCloudPlatform/skaffold/releases/download/v${SKAFFOLD_VERSION}/skaffold-linux-amd64 && \
 # TODO use temp fix distro
 
-RUN curl -Lo skaffold https://github.com/jstrachan/skaffold/releases/download/v0.5.0.1-jx/skaffold-linux-amd64 && \
+RUN curl -Lo skaffold https://github.com/jstrachan/skaffold/releases/download/v0.5.0.1-jx2/skaffold-linux-amd64 && \
 chmod +x skaffold && \
   mv skaffold /usr/bin
 
