@@ -10,6 +10,7 @@ export VERSION="$(jx-release-version)"
 echo "Releasing version to ${VERSION}"
 
 # build all the base images and generate the Dockerfile
+export PUSH="true"
 $(dirname $0)/build-images.sh
 
 docker build -t docker.io/$ORG/$APP_NAME:${VERSION} .

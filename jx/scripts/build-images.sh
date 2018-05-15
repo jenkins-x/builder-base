@@ -33,9 +33,12 @@ docker build -t docker.io/jenkinsxio/builder-$name:${VERSION} -f Dockerfile.$nam
 
 if [ "$PUSH" = "true" ]
 then
+  echo "Pushing the docker image"
   docker tagdocker.io/jenkinsxio/builder-$name:${VERSION} docker.io/jenkinsxio/builder-$name:latest
 
   docker push docker.io/jenkinsxio/builder-$name:${VERSION}
   docker push docker.io/jenkinsxio/builder-$name:latest
+else
+  echo "Not pushing the docker image as PUSH=$PUSH"
 fi
 done

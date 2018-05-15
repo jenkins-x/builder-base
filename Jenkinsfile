@@ -5,7 +5,6 @@ pipeline {
     environment {
         ORG         = 'jenkinsxio'
         APP_NAME    = 'builder-base'
-        PUSH        = 'true'
     }
     stages {
         stage('CI Build and push snapshot') {
