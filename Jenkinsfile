@@ -5,6 +5,7 @@ pipeline {
     environment {
         ORG         = 'jenkinsxio'
         APP_NAME    = 'builder-base'
+        PUSH        = 'true'
     }
     stages {
         stage('CI Build and push snapshot') {
@@ -27,6 +28,7 @@ pipeline {
             }
             steps {
                 container('jx-base') {
+                    sh "./jx/scripts/build-images.sh"
                     sh "./jx/scripts/release.sh"
                 }
             }

@@ -9,6 +9,9 @@ git config credential.helper store
 export VERSION="$(jx-release-version)"
 echo "Releasing version to ${VERSION}"
 
+# build all the base images and generate the Dockerfile
+$(dirname $0)/build-images.sh
+
 docker build -t docker.io/$ORG/$APP_NAME:${VERSION} .
 docker tag docker.io/$ORG/$APP_NAME:${VERSION} docker.io/$ORG/$APP_NAME:latest
 
@@ -19,6 +22,7 @@ docker push docker.io/$ORG/$APP_NAME:latest
 git tag -fa v${VERSION} -m "Release version ${VERSION}"
 git push origin v${VERSION}
 
-updatebot push-version --kind docker jenkinsxio/builder-base ${VERSION}
-updatebot push-version --kind helm jenkinsxio/builder-base ${VERSION}
+updatebot push-version --kind docker jenkinsxio/builder-base ${VERSION} jenkinsxio/builder-ruby ${VERSION} jenkinsxio/builder-swift ${VERSION}
+updatebot push-version --kind helm jenkinsxio/builder-base ${VERSION} jenkinsxio/builder-ruby ${VERSION} jenkinsxio/builder-swift ${VERSION}
+
 updatebot update-loop
