@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -e
+set -u
 
 # ensure we're not on a detached head
 git checkout master
