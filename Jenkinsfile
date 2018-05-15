@@ -28,7 +28,6 @@ pipeline {
             }
             steps {
                 container('jx-base') {
-                    sh "./jx/scripts/build-images.sh"
                     sh "./jx/scripts/release.sh"
                 }
             }
