@@ -4,6 +4,7 @@ RUN yum install -y epel-release && \
   make \
   wget \
   zip \
+  bzip2 \
   python-pip
 
 RUN pip install anchorecli 
