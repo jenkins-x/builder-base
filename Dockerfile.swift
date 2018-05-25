@@ -1,3 +1,22 @@
+FROM swift:4.0.3
+
+RUN apt-get update && apt-get install -y \
+  wget \
+  bzip2 \
+  python-pip
+
+RUN pip install --upgrade pip anchorecli
+
+# java required for updatebot
+RUN apt-get update && apt-get install -y openjdk-8-jre
+
+# chrome
+RUN apt-get install -y libappindicator1 fonts-liberation libasound2 libnspr4 libnss3 libxss1 lsb-release xdg-utils libappindicator3-1 && \
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    dpkg -i google-chrome*.deb && \
+    rm google-chrome*.deb
+ 
+
 # USER jenkins
 WORKDIR /home/jenkins
 
@@ -25,9 +44,9 @@ RUN curl -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
 ENV PATH=$PATH:/usr/bin/google-cloud-sdk/bin
 
 # jx-release-version
-ENV JX_RELEASE_VERSION 1.0.10
+ENV JX_RELEASE_VERSION 1.0.9
 RUN curl -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v${JX_RELEASE_VERSION}/jx-release-version-linux && \
-  mv jx-release-version /usr/bin/ && \
+  mv jx-reelease-version /usr/bin/ && \
   chmod +x /usr/bin/jx-release-version
 
 # exposecontroller
@@ -64,7 +83,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
   mv kubectl /usr/bin/
 
 # jx
-ENV JX_VERSION 1.2.87
+ENV JX_VERSION 1.2.85
 RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
   mv jx /usr/bin/
 

@@ -13,13 +13,8 @@ echo "Releasing version to ${VERSION}"
 
 # build all the base images and generate the Dockerfile
 export PUSH="true"
+export PUSH_LATEST="true"
 $(dirname $0)/build-images.sh
-
-docker build -t docker.io/$ORG/$APP_NAME:${VERSION} .
-docker tag docker.io/$ORG/$APP_NAME:${VERSION} docker.io/$ORG/$APP_NAME:latest
-
-docker push docker.io/$ORG/$APP_NAME:${VERSION}
-docker push docker.io/$ORG/$APP_NAME:latest
 
 #jx step tag --version ${VERSION}
 git tag -fa v${VERSION} -m "Release version ${VERSION}"
