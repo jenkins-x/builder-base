@@ -35,6 +35,21 @@ cat Dockerfile.common >> Dockerfile
 
 docker build --no-cache -t docker.io/jenkinsxio/builder-base:${VERSION} -f Dockerfile .
 
+if [ "$PUSH" = "true" ]; then
+  echo "Pushing the docker image"
+  docker push docker.io/jenkinsxio/builder-base:${VERSION}
+
+  if [ "$PUSH_LATEST" = "true" ]; then
+    docker tag docker.io/jenkinsxio/builder-base:${VERSION} docker.io/jenkinsxio/builder-base:latest
+    docker push docker.io/jenkinsxio/builder-base:latest
+  else
+    echo "Not pushing the latest docker image as PUSH_LATEST=$PUSH_LATEST"
+  fi
+else
+  echo "Not pushing the docker image as PUSH=$PUSH"
+fi
+
+
 for name in "${!images[@]}"
 do
 echo "pack $name uses image: ${images[$name]}"
