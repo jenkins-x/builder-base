@@ -71,6 +71,14 @@ ENV JX_VERSION 1.3.27
 RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
   mv jx /usr/bin/
 
+# aws ecr docker credential helper.
+# Currently using https://github.com/estahn/amazon-ecr-credential-helper as there are no releases yet in the main repo
+# Main repo issues tracking at https://github.com/awslabs/amazon-ecr-credential-helper/issues/80
+RUN mkdir ecr && \
+    curl -L https://github.com/estahn/amazon-ecr-credential-helper/releases/download/v0.1.1/amazon-ecr-credential-helper_0.1.1_linux_amd64.tar.gz | tar -xzv -C ./ecr/ && \
+    mv ecr/docker-credential-ecr-login /usr/bin/ && \
+    rm -rf ecr
+
 ENV PATH ${PATH}:/opt/google/chrome
 
 CMD ["helm","version"]
