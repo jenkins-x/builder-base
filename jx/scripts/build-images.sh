@@ -34,14 +34,18 @@ cat Dockerfile.yum >> Dockerfile
 cat Dockerfile.common >> Dockerfile
 
 docker build --no-cache -t docker.io/jenkinsxio/builder-base:${VERSION} -f Dockerfile .
+docker build --no-cache -t docker.io/jenkinsxio/builder-slim:${VERSION} -f Dockerfile.slim .
 
 if [ "$PUSH" = "true" ]; then
   echo "Pushing the docker image"
   docker push docker.io/jenkinsxio/builder-base:${VERSION}
+  docker push docker.io/jenkinsxio/builder-slim:${VERSION}
 
   if [ "$PUSH_LATEST" = "true" ]; then
     docker tag docker.io/jenkinsxio/builder-base:${VERSION} docker.io/jenkinsxio/builder-base:latest
     docker push docker.io/jenkinsxio/builder-base:latest
+    docker tag docker.io/jenkinsxio/builder-slim:${VERSION} docker.io/jenkinsxio/builder-slim:latest
+    docker push docker.io/jenkinsxio/builder-slim:latest
   else
     echo "Not pushing the latest docker image as PUSH_LATEST=$PUSH_LATEST"
   fi

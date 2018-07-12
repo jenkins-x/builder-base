@@ -20,7 +20,7 @@ $(dirname $0)/build-images.sh
 git tag -fa v${VERSION} -m "Release version ${VERSION}"
 git push origin v${VERSION}
 
-updatebot push-version --kind docker jenkinsxio/builder-base ${VERSION} jenkinsxio/builder-ruby ${VERSION} jenkinsxio/builder-swift ${VERSION}
-updatebot push-version --kind helm jenkinsxio/builder-base ${VERSION} jenkinsxio/builder-ruby ${VERSION} jenkinsxio/builder-swift ${VERSION}
+updatebot push-version --kind docker jenkinsxio/builder-base ${VERSION} docker jenkinsxio/builder-slim ${VERSION} jenkinsxio/builder-ruby ${VERSION} jenkinsxio/builder-swift ${VERSION}
+updatebot push-version --kind helm jenkinsxio/builder-base ${VERSION} docker jenkinsxio/builder-slim ${VERSION} jenkinsxio/builder-ruby ${VERSION} jenkinsxio/builder-swift ${VERSION}
 
 updatebot update-loop
