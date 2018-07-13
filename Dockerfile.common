@@ -83,6 +83,13 @@ RUN mkdir ecr && \
     mv ecr/docker-credential-ecr-login /usr/bin/ && \
     rm -rf ecr
 
+# ACR docker credential helper
+# https://github.com/Azure/acr-docker-credential-helper
+RUN mkdir acr && \
+    curl -L https://aadacr.blob.core.windows.net/acr-docker-credential-helper/docker-credential-acr-linux-amd64.tar.gz | tar -xzv -C ./acr/ && \
+    mv acr/docker-credential-acr-linux /usr/bin/ && \
+    rm -rf acr
+    
 ENV PATH ${PATH}:/opt/google/chrome
 
 CMD ["helm","version"]
