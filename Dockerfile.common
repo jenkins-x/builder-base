@@ -59,7 +59,6 @@ RUN curl -o ./updatebot -L https://oss.sonatype.org/content/groups/public/io/jen
   cp updatebot /usr/bin/ && \
   rm -rf updatebot
 
-
 # draft
 RUN curl https://azuredraft.blob.core.windows.net/draft/draft-canary-linux-amd64.tar.gz  | tar xzv && \
   mv linux-amd64/draft /usr/bin/ && \
@@ -90,6 +89,11 @@ RUN mkdir acr && \
     mv acr/docker-credential-acr-linux /usr/bin/ && \
     rm -rf acr
     
+# reflex
+ENV REFLEX_VERSION 0.3.1
+RUN curl -L https://github.com/ccojocar/reflex/releases/download/v${REFLEX_VERSION}/reflex_${REFLEX_VERSION}_linux_amd64.tar.gz | tar xzv && \
+  mv reflex /usr/bin/
+
 ENV PATH ${PATH}:/opt/google/chrome
 
 CMD ["helm","version"]
