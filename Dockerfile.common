@@ -14,7 +14,7 @@ RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-li
   rm -rf linux-amd64
 
 # tiller - using a hacked version until 2.11.x
-RUN curl https://github.com/jstrachan/helm-tiller-release/releases/download/2.10.0/tiller.tar.gz  -o tiller.tgz | tar xzv && \
+RUN curl https://github.com/jstrachan/helm-tiller-release/releases/download/2.10.0/tiller.tar.gz -o tiller.tgz && \
   tar xf tiller.tgz && \
   mv tiller /usr/bin/
 
