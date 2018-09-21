@@ -83,7 +83,7 @@ RUN curl -f -LO https://storage.googleapis.com/kubernetes-release/release/$(curl
   mv kubectl /usr/bin/
 
 # jx
-ENV JX_VERSION 1.3.299
+ENV JX_VERSION 1.3.300
 RUN curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
   mv jx /usr/bin/
 
