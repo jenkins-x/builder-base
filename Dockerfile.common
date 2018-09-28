@@ -102,6 +102,9 @@ ENV REFLEX_VERSION 0.3.1
 RUN curl -f -L https://github.com/ccojocar/reflex/releases/download/v${REFLEX_VERSION}/reflex_${REFLEX_VERSION}_linux_amd64.tar.gz | tar xzv && \
   mv reflex /usr/bin/
 
+# lets delete updatebot branches by default
+ENV UPDATEBOT_DELETE_MERGED_BRANCHES true
+
 ENV PATH ${PATH}:/opt/google/chrome
 
 CMD ["helm","version"]
